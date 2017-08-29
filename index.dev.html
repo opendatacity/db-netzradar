@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de" class="nojs">
+	<head>
+		<meta charset="utf-8">
+		<title>DB Netzradar</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="robots" content="index, follow, dont-enslave-humans">
+	
+		<link rel="icon" href="assets/images/app-icon-32.png" sizes="32x32">
+		<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/images/app-icon-180.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="assets/images/app-icon-152.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="assets/images/app-icon-144.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="assets/images/app-icon-120.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="assets/images/app-icon-114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/app-icon-72.png">
+		<link rel="apple-touch-icon" href="assets/images/app-icon-57.png">
+
+		<meta name="author" content="DB Fernverkehr AG">
+		<meta name="copyright" content="DB Fernverkehr AG">
+		<meta name="description" content="Eine interaktive Karte der Verbindungsqualität der vier Deutschen Mobilfunkanbieter im Fernverkehrs-Streckennetz der Deutschen Bahn AG">
+		<meta name="keywords" content="DB, Bahn, Deutsche, Bahn, Mobilfunk, Zug, Netzradar, Mobiles, Internet, UMTS, LTE, 3G, 4G">
+		<meta name="page-topic" content="Reise Tourismus">
+		<meta name="page-type" content="Statistik">
+
+		<meta name="DC.Creator" content="DB Fernverkehr AG">
+		<meta name="DC.Rights" content="DB Fernverkehr AG">
+		<meta name="DC.Description" content="Eine interaktive Karte der Verbindungsqualität der vier Deutschen Mobilfunkanbieter im Fernverkehrs-Streckennetz der Deutschen Bahn AG">
+		<meta name="DC.Language" content="de">
+
+		<meta property="og:title" content="DB Netzradar" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://netzradar.deutschebahn.com/" />
+		<meta property="og:description" content="Eine interaktive Karte der Verbindungsqualität der vier Deutschen Mobilfunkanbieter im Fernverkehrs-Streckennetz der Deutschen Bahn AG" />
+		<meta property="og:locale" content="de_DE" />
+		<meta property="og:site_name" content="Deutsche Bahn" />
+
+		<link rel="stylesheet" href="assets/lib/bootstrap-3.3.4/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/lib/leaflet/leaflet.min.css" />
+		<link rel="stylesheet" href="assets/fonts/fonts.min.css" />
+		<link rel="stylesheet" href="assets/style/main.css" />
+
+		<script src="assets/lib/jquery-1.11.2.min.js"></script>
+		<script src="assets/lib/bootstrap-3.3.4/js/bootstrap.js"></script>
+		<script src="assets/lib/chroma.js"></script>
+		<script src="assets/lib/leaflet/leaflet.js"></script>
+		<script src="assets/lib/modernizr.min.js"></script>
+		<script src="assets/lib/slick.js"></script>
+		
+		<script src="assets/js/dataloader.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/layers.js"></script>
+		<script src="assets/js/canvas.js"></script>
+	</head>
+	<body class="standalone">
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2 col-sm-3 col-xs-4">
+						<h1>DB Netzradar</h1>
+					</div>
+					<div class="col-md-10 col-sm-9 col-xs-8">
+						<nav>
+							<ul>
+								<li><a href="javascript:;" title="DB Netzradar App" data-show="#app">App</a></li>
+								<li><a href="javascript:;" title="Impressum" data-show="#impressum">Impressum</a></li>
+								<li><a href="javascript:;" title="Hinweise zum Datenschutz" data-show="#datenschutz">Datenschutz</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div id="container">
+			<div id="map"></div>
+			<div id="spinner"><div class="spinner-inner"><div class="dbglyph-spinner spinning"></div></div></div>
+			<aside id="sidebar">
+				<div class="sidebar-buttons">
+					<ul>
+						<li><a class="zoom-in" href="javascript:;" title="Karte heranzoomen"><span class="dbglyph-plus" aria-hidden="true"></span></a></li>
+						<li class="show-geolocation" id="locate"><a class="locate" href="javascript:;" title="Meine Position auf der Karte zeigen"><span class="dbglyph-marker" aria-hidden="true"></span></a></li>
+						<li><a class="zoom-out" href="javascript:;" title="Karte wegzoomen"><span class="dbglyph-minus" aria-hidden="true"></span></a></li>
+					</ul>
+				</div>
+				<div class="sidebar-item" id="providers">
+					<h2>Provider</h2>
+					<ul class="provider-list">
+						<li><a href="javascript:;" data-provider="a" class="active" title="Übersicht aller Providernetze auf der Karte anzeigen">Alle</a></li>
+						<li><a href="javascript:;" data-provider="1" title="Das Netz von T-Mobile auf der Karte anzeigen">Telekom</a></li>
+						<li><a href="javascript:;" data-provider="2" title="Das Netz von Vodafone auf der Karte anzeigen">Vodafone</a></li>
+						<li><a href="javascript:;" data-provider="7" title="Das Netz von Telefonica O&#8322; auf der Karte anzeigen">O&#8322;</a></li>
+						<li><a href="javascript:;" data-provider="3" title="Das Netz von E-Plus auf der Karte anzeigen">E-Plus</a></li>
+					</ul>
+					<div class="sidebar-switch" id="lteswitch">
+						<a class="lte-toggle active" href="javascript:;">
+							<span class="indicator"></span>
+							Inkl<span class="hide-small">usive</span> LTE
+						</a>
+					</div>
+				</div>
+				<div class="sidebar-item">
+					<h2>Legende</h2>
+					<ul class="legend-list">
+						<li class="good"><span class="icon"></span> Gut<span class="hide-small">e Verbindung</span></li>
+						<li class="bad"><span class="icon"></span> Mäßig<span class="hide-small">e Verbindung</span></li>
+						<li class="ugly"><span class="icon"></span> Schlecht<span class="hide-small">e Verbindung</span></li>
+					</ul>
+					<p>Für Streck&shy;en oh&shy;ne Her&shy;vor&shy;he&shy;bun&shy;gen lie&shy;gen noch nicht ge&shy;nü&shy;gend Da&shy;ten vor.</p>
+				</div>
+			</aside>
+			<div id="app" class="nav-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+							<a href="javascript:;" title="Schließen" class="close close-app"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+							<h2>DB Netzradar App</h2>
+							<img src="assets/images/app.png" class="app-icon" alt="DB Netzradar Icon">
+							<p>
+								Wie schnell sind Sie während Ihrer Reise mit der Bahn mobil im Internet unterwegs? Testen Sie Ihre Internetverbindung mit dem Smartphone und helfen Sie uns, ein Bild der Mobilfunkversorgung im Bahnnetz entlang Ihrer Reise zu erstellen.
+							</p>
+							<p>
+								Als weiteren Service bietet Ihnen die DB Netzradar App einen Feedback-Kanal direkt zu uns. Teilen Sie uns mit, wann und wo Sie Probleme mit der Qualität der Mobilfunkversorgung an Bord hatten. Egal ob Sprache oder Daten – mit Ihrer Hilfe können wir die Versorgung bezüglich mobiler Kommunikationsdienste gezielt verbessern helfen.
+							</p>
+							<ul>
+								<li><a href="https://itunes.apple.com/de/app/db-netzradar/id945408814?mt=8" title="DB Netzradar iPhone App im iOS App Store anzeigen"><img src="assets/images/app-store.png"></a></li>
+								<li><a href="https://play.google.com/store/apps/details?id=de.db.fv2020" title="DB Netzradar Android App im Google Play Store anzeigen"><img src="assets/images/play-store.png"></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="impressum" class="nav-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0">
+							<a href="javascript:;" title="Schließen" class="close close-impressum"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+							<h2>Impressum</h2>
+							<div class="vcard">
+								<p>Dies ist eine Seite der</p>
+								<p>
+									<address>
+										<span class="fn org">DB Fernverkehr AG</span><br>
+										<span class="adr">
+											<span class="street-address">Stephensonstraße 1</span><br>
+											<span class="postal-code">60327</span> <span class="locality">Frankfurt</span><br>
+										</span>
+										<a href="http://www.deutschebahn.com" class="fn org url">http://www.deutschebahn.com</a><br>
+										<span class="tel"><span class="type">Fax</span>: <a href="tel:+69260914414">+49 69 260 914414</a></span><br>
+									</address>
+								</p>
+								<p>Sitz der Gesellschaft: Frankfurt am Main</p>
+								<p>Registergericht: Frankfurt am Main, HRB 83173</p>
+								<p>USt-IdNr.: DE 260656754</p>
+								<p>
+									Vorstand: 
+									<span class="fn">Berthold Huber</span> (Vorsitzender), 
+									<span class="fn">Andreas Busemann</span>, 
+									<span class="fn">Ulrike Haber-Schilling</span>, 
+									<span class="fn">Wolfgang Heinrichs</span>, 
+									<span class="fn"><span class="honorific-prefix">Dr.</span> Manuel Rehkopf</span>
+								</p>
+								<p>
+									Vorsitzender des Aufsichtsrates: 
+									<span class="fn">Ulrich Homburg</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="datenschutz" class="nav-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+							<a href="javascript:;" title="Schließen" class="close close-datenschutz"><span class="dbglyph-cross" aria-hidden="true"></span></a>
+							<h2>Datenschutzhinweis</h2>
+							<p><strong>Wer ist verantwortliche Stelle für die Datenerhebung und -verarbeitung?</strong></p>
+							<p>Die DB Fernverkehr AG erhebt und verarbeitet Ihre Daten als verantwortliche Stelle.</p>
+							<div class="vcard">
+								<p>Die bestellte Datenschutzbeauftragte ist Frau <span class="fn">Chris Newiger</span>. Sollten Sie Fragen, Anregungen und/oder Kritik in Bezug auf diese Webseite haben, so kontaktieren Sie bitte:</p>
+								<p>
+									<address>
+										<span class="fn org">DB Fernverkehr AG</span><br>
+										<span class="adr">
+											<span class="street-address">Stephensonstraße 1</span><br>
+											<span class="postal-code">60327</span> <span class="locality">Frankfurt</span>
+										</span>
+									</address>
+								</p>
+								<p>
+									Für Fragen und Anregungen zum Datenschutz können Sie eine E-Mail richten an <a class="email" href="mailto:db.netzradar@deutschebahn.com">db.netzradar@deutschebahn.com</a>
+								</p>
+							</div>
+							<p><strong>Wann erhebt und verarbeitet netzradar.deutschebahn.com Ihre Daten?</strong></p>
+							<p>Aus technischen Gründen werden beim Besuch von netzradar.deutschebahn.com.de bestimmte Daten erhoben und gespeichert. Soweit diese Daten Aufschluss über Zahl der Besucher und Nutzung unserer Webseiten ermöglichen, erfolgt dies ausschließlich anonym.</p>
+							<p><strong>Information zu externen Seiten</strong></p>
+							<p>Wenn Sie einen Link auf eine externe Seite anklicken, bewegen Sie sich außerhalb der DB-Seiten. Der Konzern Deutsche Bahn AG ist somit nicht verantwortlich für den Inhalt, die Dienste oder Produkte, die auf der verlinkten Webseite angeboten werden und auch nicht für den Datenschutz und die technische Sicherheit auf der verlinkten Webseite.</p>
+							<p><strong>Aktualisierung der Datenschutzhinweise</strong></p>
+							<p>Wir passen den Datenschutzhinweis an veränderte Funktionalitäten von netzradar.deutschebahn.com an. Wir empfehlen, den Datenschutzhinweis in regelmäßigen Abständen zur Kenntnis zu nehmen.</p>
+							<p><em>Stand August 2015</em></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="lizenz">
+				Kartenmaterial: <a href="//www.deutschebahn.com/">Deutsche Bahn</a>, <a href="//opendatacity.de">OpenDataCity</a>, <a href="//openstreetmap.org">OpenStreetMap Mitwirkende</a>; Veröffentlicht unter <a href="http://opendatacommons.org/licenses/odbl/1.0/">ODbL 1.0</a>
+			</div>
+		</div>
+		<div id="upgrade">
+			<h1>Moderner Browser benötigt</h1>
+			<p>Diese Visualisierung verwendet moderne Webtechnologien, die von Ihrem Browser leider nicht unterstützt werden. Hier finden Sie eine Auswahl moderner Browser:</p>
+			<ul>
+				<li><a href="https://www.mozilla.org/de/firefox/new/" rel="nofollow" title="Mozilla Firefox 21+"><span class="dbglyph-firefox" aria-hidden="true"></span></a></li>
+				<li><a href="https://www.google.de/chrome/browser/desktop/" rel="nofollow" title="Google Chrome 23+"><span class="dbglyph-chrome" aria-hidden="true"></span></a></li>
+				<li><a href="https://www.apple.com/de/safari/" rel="nofollow" title="Apple Safari 6+"><span class="dbglyph-safari" aria-hidden="true"></span></a></li>
+				<li><a href="http://www.opera.com/de" rel="nofollow" title="Opera 15+"><span class="dbglyph-opera" aria-hidden="true"></span></a></li>
+				<li><a href="http://windows.microsoft.com/de-de/internet-explorer/download-ie" rel="nofollow" title="Microsoft Internet Explorer 10+"><span class="dbglyph-IE" aria-hidden="true"></span></a></li>
+			</ul>
+		</div>
+		<div id="activate-js">
+			<h1>JavaScript benötigt</h1>
+			<p>Diese Visualisierung verwendet JavaScript, welches in Ihrem Browser für diese Seite leider deaktiviert ist. Um die Visualisierung benutzen zu können, müssen Sie JavaScript für diese Seite aktivieren.</p>
+		</div>
+	</body>
+</html>
+

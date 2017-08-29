@@ -1,0 +1,19 @@
+{
+  "name": "netzradar-frontend",
+  "version": "0.0.1",
+  "description": "db netzradar frontend",
+  "main": "index.js",
+  "dependencies": {
+    "uglify": "^0.1.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.opendatacity.de:opendatacity/dbnetz_frontend.git"
+  },
+  "author": "yetzt <node@yetzt.me> (https://yetzt.me/)",
+  "license": "Public Domain"
+}

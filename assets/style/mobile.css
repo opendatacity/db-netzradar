@@ -1,0 +1,348 @@
+/* defaults */
+*::after, *::before { box-sizing: border-box; }
+*::after, *::before { box-sizing: border-box; }
+html { font-size: 10px; }
+html { font-family: sans-serif; }
+* { box-sizing: border-box; }
+body:not([id]) { cursor: auto !important; }
+
+/* disable tap highlight */
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-family: "DB Office", sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+}
+
+	#container {
+
+		display: block;
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		top: 0px;
+		background-image: url('../images/background.png');
+		background-size: cover;
+		background-position: center;
+		z-index: 100;
+
+	}
+	
+		/* license information */
+		#container #lizenz {
+			display: block;
+			position: absolute;
+			height: 20px;
+			line-height: 20px;
+			font-size: 10px;
+			text-align: center;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(255,255,255,0.2);
+			color: #444;
+			pointer-events: none;
+			z-index: 50;
+			
+		}
+		
+			#container #lizenz a {
+				color: #444;
+				text-decoration: underline;
+				pointer-events: auto;
+			}
+	
+		/* map */
+		#container #map {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: none;
+			z-index: 10;
+			
+		}
+
+		/* provider switcher */
+		#container #providers {
+			display: block;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			right: 0px;
+			height: 60px;
+			z-index: 100;
+			text-shadow: 0 0 15px rgba(255,255,255,0.75);
+		}
+		
+			#container #providers .provider-list {
+				display: block;
+				position: relative;
+				width: 100%;
+				height: 60px;
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+				overflow: hidden;
+			}
+
+				#container #providers .provider-list a {
+					display: block;
+					position: relative;
+					float: left;
+					height: 60px;
+					line-height: 60px;
+					margin: 0px;
+					padding: 0px;
+					color: #000;
+					text-align: center;
+					font-size: 1.7em;
+					font-family: "DB Head";
+					text-decoration: none;
+					font-weight: 200;
+				}
+				
+			#container #providers .provider-prev {
+				display: block;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 60px;
+				height: 60px;
+				line-height: 70px;
+				text-align: center;
+				color: #000;
+				text-decoration: none;
+				font-size: 1.2em;
+				border-width: 0;
+			}
+			
+			#container #providers .provider-next {
+				display: block;
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				width: 60px;
+				height: 60px;
+				line-height: 70px;
+				text-align: center;
+				color: #000;
+				text-decoration: none;
+				font-size: 1.2em;
+				border-width: 0;
+			}
+			
+		/* legend */
+		#container #legende {
+			
+			display: block;
+			position: absolute;
+			left: 0;
+			bottom: 30px;
+			height: 35px;
+			width: 85%;
+			background-color: rgba(255,255,255,0.75);
+			z-index: 100;
+			pointer-events: none;
+			
+		}
+		
+			#container #legende ul {
+				display: block;
+				position: relative;
+				height: 35px;
+				width: 100%;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+				#container #legende ul li {
+				
+					display: block;
+					position: relative;
+					height: 35px;
+					line-height: 38px;
+					width: 33%;
+					float: left;
+					padding-left: 45px;
+				}
+				
+					#container #legende ul li.good { width: 26%; }
+					#container #legende ul li.bad { width: 31%; }
+					#container #legende ul li.ugly { width: 39%; }
+					
+				#container #legende ul li .icon {
+					display: block;
+					position: absolute;
+					width: 27px;
+					height: 21px;
+					left: 14px;
+					bottom: 10px;
+					background-image: url(../images/phone-sprite.png);
+					background-repeat: no-repeat;
+					background-size: 135px;
+				}
+
+				/* sprite magic for provider-based color switching */
+				#container #legende ul li.good .icon { background-position: 0px 0px; }
+				#container #legende ul li.bad .icon { background-position: 0px -21px; }
+				#container #legende ul li.ugly .icon { background-position: 0px -42px; }
+/*
+				.provider-1 #container #legende ul li.good .icon { background-position: -27px 0px; }
+				.provider-1 #container #legende ul li.bad .icon { background-position: -27px -21px; }
+				.provider-1 #container #legende ul li.ugly .icon { background-position: -27px -42px; }
+				
+				.provider-2 #container #legende ul li.good .icon { background-position: -54px 0px; }
+				.provider-2 #container #legende ul li.bad .icon { background-position: -54px -21px; }
+				.provider-2 #container #legende ul li.ugly .icon { background-position: -54px -42px; }
+
+				.provider-3 #container #legende ul li.good .icon { background-position: -81px 0px; }
+				.provider-3 #container #legende ul li.bad .icon { background-position: -81px -21px; }
+				.provider-3 #container #legende ul li.ugly .icon { background-position: -81px -42px; }
+
+				.provider-7 #container #legende ul li.good .icon { background-position: -108px 0px; }
+				.provider-7 #container #legende ul li.bad .icon { background-position: -108px -21px; }
+				.provider-7 #container #legende ul li.ugly .icon { background-position: -108px -42px; }
+*/		
+
+		/* locate button */
+		#container #zoom {
+			display: none;
+		}
+
+		/* show zoom buttons when viewport need zoom */
+		.zoom #container #zoom {
+			
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 60px;
+			width: 14%;
+			z-index: 100;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			
+		}
+				
+			#container #zoom li {
+				display: block;
+				position: relative;
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				
+			}
+
+				#container #zoom li+li {
+				
+					margin-top: 5px;
+					
+				}
+				
+				#container #zoom li a {
+			
+					display: block;
+					position: relative;
+					height: 35px;
+					line-height: 45px;
+					text-align: center;
+					color: #fff;
+					background-color: #878c96;
+					text-decoration: none;
+					font-size: 1.8em;
+				}
+
+				#container #zoom li a[disabled] {
+					opacity: 0.5;
+					pointer-events: none;
+				}
+				
+
+		/* locate button */
+		#container #locate {
+			display: none;
+		}
+
+		/* show locate button when viewport has geolocation capability */
+		.geolocation #container #locate {
+			
+			display: block;
+			position: absolute;
+			right: 0;
+			bottom: 80px;
+			height: 35px;
+			width: 14%;
+			z-index: 100;
+			
+		}
+		
+			#container #locate a {
+				display: block;
+				position: relative;
+				height: 35px;
+				line-height: 45px;
+				text-align: center;
+				color: #fff;
+				background-color: #878c96;
+				text-decoration: none;
+				font-size: 1.8em;
+			}
+
+				/* fancy pulsating icon css animation magic */
+				#container #locate a.active {
+				
+					color: #66b1ff;
+					-webkit-animation: color_change 1s infinite alternate;
+					-moz-animation: color_change 1s infinite alternate;
+					-ms-animation: color_change 1s infinite alternate;
+					-o-animation: color_change 1s infinite alternate;
+					animation: color_change 1s infinite alternate;
+				
+				}
+				@-webkit-keyframes color_change { from { color: #66b1ff; } to { color: #ffffff; } }
+				@-moz-keyframes color_change { from { color: #66b1ff; } to { color: #ffffff; } }
+				@-ms-keyframes color_change { from { color: #66b1ff; } to { color: #ffffff; } }
+				@-o-keyframes color_change { from { color: #66b1ff; } to { color: #ffffff; } }
+				@keyframes color_change { from { color: #66b1ff; } to { color: #ffffff; } }
+		
+		/* lte toggle */
+		#container #lteswitch {
+			
+			display: block;
+			position: absolute;
+			right: 0;
+			bottom: 30px;
+			height: 35px;
+			width: 14%;
+			z-index: 100;
+			
+		}
+
+			#container #lteswitch a {
+				display: block;
+				position: relative;
+				height: 35px;
+				line-height: 38px;
+				text-align: center;
+				color: #000;
+				background-color: rgba(255,255,255,0.75);
+				text-decoration: none;
+			}
+			
+				#container #lteswitch a.active {
+					color: #fff;
+					background-color: #878c96;
+				}

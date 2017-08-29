@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'DB Head';
+	src: url('dbhea02-web.eot');
+	src: url('dbhea02-web?#iefix') format('embedded-opentype'),
+		 url('dbhea02-web.woff') format('woff'),
+		 url('dbhea02-web.ttf') format('truetype'),
+		 url('dbhea02-web.svg#DBHeadLightRegular') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}

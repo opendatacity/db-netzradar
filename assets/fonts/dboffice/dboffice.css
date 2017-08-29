@@ -1,0 +1,44 @@
+@font-face {
+	font-family: 'DB Office';
+	src: url('dboff03.eot');
+	src: url('dboff03.eot?#iefix') format('embedded-opentype'),
+		 url('dboff03.woff') format('woff'),
+		 url('dboff03.ttf') format('truetype'),
+		 url('dboff03.svg#DB Office') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DB Office';
+	src: url('dboff06.eot');
+	src: url('dboff06.eot?#iefix') format('embedded-opentype'),
+		 url('dboff06.woff') format('woff'),
+		 url('dboff06.ttf') format('truetype'),
+		 url('dboff06.svg#DB Office Bold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'DB Office';
+	src: url('dboff33.eot');
+	src: url('dboff33.eot?#iefix') format('embedded-opentype'),
+		 url('dboff33.woff') format('woff'),
+		 url('dboff33.ttf') format('truetype'),
+		 url('dboff33.svg#DB Office Italic') format('svg');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'DB Office';
+	src: url('dboff36.eot');
+	src: url('dboff36.eot?#iefix') format('embedded-opentype'),
+		 url('dboff36.woff') format('woff'),
+		 url('dboff36.ttf') format('truetype'),
+		 url('dboff36.svg#DB Office Bold Italic') format('svg');
+	font-weight: 700;
+	font-style: italic;
+}
+

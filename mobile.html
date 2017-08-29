@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de" class="nojs">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title>DB Netzradar</title>
+		<link rel="stylesheet" href="assets/lib/leaflet/leaflet.min.css" />
+		<link rel="stylesheet" href="assets/fonts/fonts.min.css" />
+		<link rel="stylesheet" href="assets/style/mobile.css" />
+		<script type="text/javascript">
+			var _filename = 'data4000.json';
+		</script>
+		<script src="assets/data/data.js"></script>
+		<script src="assets/lib/libraries.min.js"></script>
+		<script src="assets/js/netzradar.min.js"></script>
+	</head>
+	<body class="mobile">
+		<div id="container">
+			<div id="map"></div>
+			<div id="providers">
+				<div class="provider-list">
+					<a href="javascript:;" data-provider="a" class="active">Alle Provider</a>
+					<a href="javascript:;" data-provider="1">Telekom</a>
+					<a href="javascript:;" data-provider="2">Vodafone</a>
+					<a href="javascript:;" data-provider="7">O&#8322;</a>
+					<a href="javascript:;" data-provider="3">E-Plus</a>
+				</div>
+				<a href="javascript:;" class="provider-prev"><span class="dbglyph-prev"></span></a>
+				<a href="javascript:;" class="provider-next"><span class="dbglyph-next"></span></a>
+			</div>
+			<div id="legende">
+				<ul class="legend-list">
+					<li class="good"><span class="icon"></span> Gut</li>
+					<li class="bad"><span class="icon"></span> M&auml;&szlig;ig</li>
+					<li class="ugly"><span class="icon"></span> Schlecht</li>
+				</ul>
+			</div>
+			<div id="sidebar">
+				<ul class="show-zoom" id="zoom">
+					<li><a class="zoom-in" href="javascript:;" title="Karte heranzoomen"><span class="dbglyph-plus" aria-hidden="true"></span></a></li>
+					<li><a class="zoom-out" href="javascript:;" title="Karte wegzoomen"><span class="dbglyph-minus" aria-hidden="true"></span></a></li>
+				</ul>
+			</div>
+			<div class="show-geolocation" id="locate">
+				<a class="locate" href="javascript:;" title="Lokalisieren"><span class="dbglyph-marker" aria-hidden="true"></span></a>
+			</div>
+			<div id="lteswitch">
+				<a class="lte-toggle active" href="javascript:;">LTE</a>
+			</div>
+			<div id="lizenz">
+				Kartenmaterial: <a href="http://www.deutschebahn.com/">Deutsche Bahn</a>, <a href="https://opendatacity.de">OpenDataCity</a>, <a href="http://openstreetmap.org">OpenStreetMap Mitwirkende</a>; Ver&ouml;ffentlicht unter <a href="http://opendatacommons.org/licenses/odbl/1.0/">ODbL 1.0</a>
+			</div>
+		</div>
+	</body>
+</html>
