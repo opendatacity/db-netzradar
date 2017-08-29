@@ -1,0 +1,6 @@
+dist
+dist.7z
+dist.*.7z
+*.gz
+node_modules
+assets/js/netzradar.min.js
